@@ -45,7 +45,7 @@ route.post('/item', function(request, response) {
     fs.readFile('./src/models/tasks.json', 'utf-8', function(err, data){
         if (!err) {
             const obj = JSON.parse(data)
-            console.log(`Post item: ${request.body.id}`);
+            console.log(`Post item: ${request.body.title}`);
             
             obj.push(Object.assign({}, request.body, {id: Date.now() + obj.length}));
             const json = JSON.stringify(obj);
@@ -79,9 +79,9 @@ route.delete('/item/:id', function(request, response) {
     fs.readFile('./src/models/tasks.json', 'utf-8', function(err, data){
         if (!err) {
             const obj = JSON.parse(data)
-            console.log(`Delete item: ${request.params}`);
+            console.log(`Delete item: ${request.params.id}`);
             
-            const indexToDelte = obj.findIndex((item) => item === request.params.id);
+            const indexToDelte = obj.findIndex((item) => item.id === parseInt(request.params.id));
             obj.splice(indexToDelte, 1);
             const json = JSON.stringify(obj);
 
