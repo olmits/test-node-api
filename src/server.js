@@ -92,7 +92,6 @@ route.delete('/item/:id', function(request, response) {
                     console.log('Writing file success');
                 }
             });
-
             return response.send(json);
         } else {
             return response.send({error: `Reading file error ${err}`});
